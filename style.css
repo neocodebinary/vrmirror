@@ -145,27 +145,53 @@ body {
 /* Custom Select */
 .lang-select-container {
     position: relative;
-    background: #f5f5f7;
+    display: inline-flex;
+    align-items: center;
+    background: var(--glass-surface);
+    -webkit-backdrop-filter: var(--glass-blur);
+    backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
     border-radius: 100px;
-    padding: 8px 16px;
-    transition: background 0.2s;
+    padding: 9px 16px;
+    box-shadow: var(--glass-shadow);
+    transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
 }
 
 .lang-select-container:hover {
-    background: #ebebf0;
+    background: #ffffff;
+    box-shadow: 0 8px 22px -4px rgba(0, 0, 0, 0.12);
+    transform: translateY(-1px);
+}
+
+/* Custom chevron arrow */
+.lang-select-container::after {
+    content: "";
+    width: 8px;
+    height: 8px;
+    margin-left: 8px;
+    border-right: 2px solid var(--color-text-muted);
+    border-bottom: 2px solid var(--color-text-muted);
+    transform: translateY(-2px) rotate(45deg);
+    pointer-events: none;
 }
 
 select {
     background: transparent;
     border: none;
+    font-family: inherit;
     font-size: 0.9rem;
     font-weight: 600;
     color: var(--color-text);
     cursor: pointer;
     outline: none;
     appearance: none;
-    padding-right: 14px;
-    /* Space for custom arrow if needed */
+    -webkit-appearance: none;
+    padding-right: 2px;
+}
+
+select option {
+    color: #1d1d1f;
+    background: #ffffff;
 }
 
 /* --- Layout System --- */

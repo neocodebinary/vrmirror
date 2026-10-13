@@ -14,6 +14,11 @@
         .story-content strong { color: var(--color-text); }
         .yt-container { position: relative; width: 100%; padding-bottom: 56.25%; border-radius: 24px; overflow: hidden; margin-top: 40px; box-shadow: var(--glass-shadow); }
         .yt-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+
+        /* Google Translate runs hidden; we drive it from our own native-name selector */
+        #google_translate_element { display: none !important; }
+        .goog-te-banner-frame, .skiptranslate > iframe { display: none !important; }
+        body { top: 0 !important; position: static !important; }
     </style>
 </head>
 
@@ -34,8 +39,40 @@
                 <span>VR Mirror</span>
             </a>
 
-            <!-- Google Translate Widget instead of the normal selector for this long page -->
-            <div id="google_translate_element" style="border-radius: 100px; overflow:hidden;"></div>
+            <!-- Native-name selector that drives Google Translate (hidden). notranslate = keep names in their own language -->
+            <div class="lang-select-container notranslate" translate="no">
+                <select id="historyLang" onchange="translateTo(this.value)" aria-label="Idioma">
+                    <option value="es">🇪🇸 Español</option>
+                    <option value="en">🇬🇧 English</option>
+                    <option value="fr">🇫🇷 Français</option>
+                    <option value="de">🇩🇪 Deutsch</option>
+                    <option value="it">🇮🇹 Italiano</option>
+                    <option value="pt">🇧🇷 Português</option>
+                    <option value="nl">🇳🇱 Nederlands</option>
+                    <option value="pl">🇵🇱 Polski</option>
+                    <option value="sv">🇸🇪 Svenska</option>
+                    <option value="da">🇩🇰 Dansk</option>
+                    <option value="fi">🇫🇮 Suomi</option>
+                    <option value="no">🇳🇴 Norsk</option>
+                    <option value="cs">🇨🇿 Čeština</option>
+                    <option value="ro">🇷🇴 Română</option>
+                    <option value="hu">🇭🇺 Magyar</option>
+                    <option value="el">🇬🇷 Ελληνικά</option>
+                    <option value="uk">🇺🇦 Українська</option>
+                    <option value="ru">🇷🇺 Русский</option>
+                    <option value="tr">🇹🇷 Türkçe</option>
+                    <option value="ar">🇸🇦 العربية</option>
+                    <option value="hi">🇮🇳 हिन्दी</option>
+                    <option value="bn">🇧🇩 বাংলা</option>
+                    <option value="vi">🇻🇳 Tiếng Việt</option>
+                    <option value="th">🇹🇭 ไทย</option>
+                    <option value="id">🇮🇩 Bahasa Indonesia</option>
+                    <option value="zh-CN">🇨🇳 中文 (简体)</option>
+                    <option value="ja">🇯🇵 日本語</option>
+                    <option value="ko">🇰🇷 한국어</option>
+                </select>
+            </div>
+            <div id="google_translate_element"></div>
         </nav>
     </div>
 
@@ -77,22 +114,20 @@
             <p>Lo construí para ella, pero sé que miles de familias están en la misma situación, sin poder pagar tecnología médica costosa. Por eso decidí lanzarlo:</p>
             <ul style="color: var(--color-text-muted); line-height: 1.7; font-weight: 500; font-size: 1.1rem;">
                 <li><strong>100% Gratis y No Comercial:</strong> No quiero ganar dinero con tu salud.</li>
-                <li><strong>Código Fuente Disponible:</strong> El código es público para que puedas verificar que es seguro.</li>
                 <li><strong>Privado:</strong> No se requiere inicio de sesión. No se recopilan datos.</li>
-                <li><strong>Accesible:</strong> Funciona en iOS, Android y Web con gafas de RV baratas de $10.</li>
+                <li><strong>Accesible:</strong> Funciona en iOS y Android con gafas de RV baratas de $10.</li>
             </ul>
 
             <h2>🚀 ENLACES DE DESCARGA (Oficiales)</h2>
-            <p>Puedes descargar las aplicaciones nativas o usar la versión web aquí:</p>
+            <p>Puedes descargar las aplicaciones nativas aquí:</p>
             <div style="display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 32px;">
-                <a href="https://apps.apple.com/us/app/vr-mirror-visual-training/id6756859575" target="_blank" class="badge badge-apple" style="border-radius: 12px; height: 50px; padding: 0 20px; text-decoration: none; color: white; display:flex; align-items:center; font-weight: 600; gap: 8px;">
-                    🍎 iOS (App Store)
-                </a>
                 <a href="https://play.google.com/store/apps/details?id=com.neowavercode.therapyvrmirror" target="_blank" class="badge badge-google" style="border-radius: 12px; height: 50px; padding: 0 20px; text-decoration: none; color: white; display:flex; align-items:center; font-weight: 600; gap: 8px;">
-                    🤖 Android (Google Play)
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="white"><path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.5,12.92 20.16,13.19L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L3.84,2.15C3.84,2.15 6.05,2.66 6.05,2.66Z" /></svg>
+                    Android (Google Play)
                 </a>
-                <a href="https://neocodebinary.github.io/vrtherapy/" target="_blank" class="badge badge-web" style="border-radius: 12px; height: 50px; padding: 0 20px; text-decoration: none; color: white; display:flex; align-items:center; font-weight: 600; gap: 8px;">
-                    🌐 Versión Web
+                <a href="https://apps.apple.com/us/app/vr-mirror-visual-training/id6756859575" target="_blank" class="badge badge-apple" style="border-radius: 12px; height: 50px; padding: 0 20px; text-decoration: none; color: white; display:flex; align-items:center; font-weight: 600; gap: 8px;">
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="white"><path d="M18.71,19.5C17.88,20.74 17,21.95 15.66,21.97C14.32,22 13.89,21.18 12.37,21.18C10.84,21.18 10.37,21.95 9.1,22C7.79,22.05 6.8,20.68 5.96,19.47C4.25,17 2.94,12.45 4.7,9.39C5.57,7.87 7.13,6.91 8.82,6.88C10.1,6.86 11.32,7.75 12.11,7.75C12.89,7.75 14.37,6.68 15.92,6.84C16.57,6.87 18.39,7.1 19.56,8.82C19.47,8.88 17.39,10.1 17.41,12.63C17.44,15.65 20.06,16.66 20.09,16.67C20.06,16.74 19.67,18.11 18.71,19.5M13,3.5C13.73,2.67 14.94,2.04 15.89,2C16,3.06 15.6,4.08 15,4.76C14.27,5.61 13.01,6.34 12,6.3C11.88,5.19 12.33,4.16 13,3.5Z" /></svg>
+                    iOS (App Store)
                 </a>
             </div>
 
@@ -138,10 +173,36 @@
         function googleTranslateElementInit() {
             new google.translate.TranslateElement({
                 pageLanguage: 'es', 
-                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                includedLanguages: 'en,es,zh-CN,hi,ar,pt,ru,ja,de,fr,ko,it,tr,vi,pl,uk,nl,th,id,sv,da,fi,no,el,cs,ro,hu,bn',
                 autoDisplay: false
             }, 'google_translate_element');
         }
+
+        // Our native-name selector drives the hidden Google Translate combo
+        function translateTo(code) {
+            if (code === 'es') {
+                // Back to the original Spanish: clear Google's cookie and reload
+                const expire = 'expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+                document.cookie = 'googtrans=; ' + expire;
+                document.cookie = 'googtrans=; ' + expire + ' domain=.' + location.hostname + ';';
+                location.reload();
+                return;
+            }
+            const combo = document.querySelector('.goog-te-combo');
+            if (!combo) return;
+            combo.value = code;
+            combo.dispatchEvent(new Event('change'));
+        }
+
+        // Keep the selector in sync with the active translation after a reload
+        window.addEventListener('load', function () {
+            const m = document.cookie.match(/googtrans=\/[^/]*\/([^;]+)/);
+            if (!m) return;
+            const my = document.getElementById('historyLang');
+            if (my && [].some.call(my.options, function (o) { return o.value === m[1]; })) {
+                my.value = m[1];
+            }
+        });
     </script>
     <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
