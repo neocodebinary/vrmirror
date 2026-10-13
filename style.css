@@ -145,14 +145,12 @@ body {
 /* Custom Select */
 .lang-select-container {
     position: relative;
-    display: inline-flex;
-    align-items: center;
+    display: inline-block;
     background: var(--glass-surface);
     -webkit-backdrop-filter: var(--glass-blur);
     backdrop-filter: var(--glass-blur);
     border: 1px solid var(--glass-border);
     border-radius: 100px;
-    padding: 9px 16px;
     box-shadow: var(--glass-shadow);
     transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
 }
@@ -163,15 +161,18 @@ body {
     transform: translateY(-1px);
 }
 
-/* Custom chevron arrow */
+/* Custom chevron arrow — overlaid on top of the select; clicks fall through
+   to it (pointer-events: none) so tapping the arrow opens the dropdown too */
 .lang-select-container::after {
     content: "";
+    position: absolute;
+    right: 16px;
+    top: 50%;
     width: 8px;
     height: 8px;
-    margin-left: 8px;
     border-right: 2px solid var(--color-text-muted);
     border-bottom: 2px solid var(--color-text-muted);
-    transform: translateY(-2px) rotate(45deg);
+    transform: translateY(-70%) rotate(45deg);
     pointer-events: none;
 }
 
@@ -186,7 +187,11 @@ select {
     outline: none;
     appearance: none;
     -webkit-appearance: none;
-    padding-right: 2px;
+    /* The select itself fills the whole pill — including the area under the
+       chevron — so the entire control is clickable, arrow included */
+    margin: 0;
+    padding: 9px 38px 9px 18px;
+    border-radius: 100px;
 }
 
 select option {
